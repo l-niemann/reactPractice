@@ -8,51 +8,117 @@ export function Calculator() {
     <>
       <HomeLink />
       <h1>Calculator App</h1>
-      <div className="calcBox">
-        <InputBox equation={equation} setEquation={setEquation} />
-      </div>
-
-      <div className="numbers">
-        <div className="button-row">
-          <NumButton value="1" equation={equation} setEquation={setEquation} />
-          <NumButton value="2" equation={equation} setEquation={setEquation} />
-          <NumButton value="3" equation={equation} setEquation={setEquation} />
+      <div className="calc">
+        <div className="calc-box">
+          <InputBox equation={equation} setEquation={setEquation} />
         </div>
 
-        <div className="button-row">
-          <NumButton value="4" equation={equation} setEquation={setEquation} />
-          <NumButton value="5" equation={equation} setEquation={setEquation} />
-          <NumButton value="6" equation={equation} setEquation={setEquation} />
+        <div className="numbers">
+          <div className="button-row">
+            <NumButton
+              value="1"
+              equation={equation}
+              setEquation={setEquation}
+            />
+            <NumButton
+              value="2"
+              equation={equation}
+              setEquation={setEquation}
+            />
+            <NumButton
+              value="3"
+              equation={equation}
+              setEquation={setEquation}
+            />
+          </div>
+
+          <div className="button-row">
+            <NumButton
+              value="4"
+              equation={equation}
+              setEquation={setEquation}
+            />
+            <NumButton
+              value="5"
+              equation={equation}
+              setEquation={setEquation}
+            />
+            <NumButton
+              value="6"
+              equation={equation}
+              setEquation={setEquation}
+            />
+          </div>
+
+          <div className="button-row">
+            <NumButton
+              value="7"
+              equation={equation}
+              setEquation={setEquation}
+            />
+            <NumButton
+              value="8"
+              equation={equation}
+              setEquation={setEquation}
+            />
+            <NumButton
+              value="9"
+              equation={equation}
+              setEquation={setEquation}
+            />
+          </div>
+
+          <div className="button-row">
+            <NumButton
+              value="0"
+              equation={equation}
+              setEquation={setEquation}
+            />
+            <EnterButton equation={equation} setEquation={setEquation} />
+          </div>
         </div>
 
-        <div className="button-row">
-          <NumButton value="7" equation={equation} setEquation={setEquation} />
-          <NumButton value="8" equation={equation} setEquation={setEquation} />
-          <NumButton value="9" equation={equation} setEquation={setEquation} />
-        </div>
+        <div className="operators">
+          <div className="button-row">
+            <NumButton
+              value="+"
+              equation={equation}
+              setEquation={setEquation}
+            />
+            <NumButton
+              value="-"
+              equation={equation}
+              setEquation={setEquation}
+            />
+          </div>
 
-        <div className="button-row">
-          <NumButton value="0" equation={equation} setEquation={setEquation} />
-          <EnterButton equation={equation} setEquation={setEquation} />
-        </div>
-      </div>
+          <div className="button-row">
+            <NumButton
+              value="*"
+              equation={equation}
+              setEquation={setEquation}
+            />
+            <NumButton
+              value="/"
+              equation={equation}
+              setEquation={setEquation}
+            />
+          </div>
 
-      <div className="operators">
-        <div className="button-row">
-          <NumButton value="+" equation={equation} setEquation={setEquation} />
-          <NumButton value="-" equation={equation} setEquation={setEquation} />
+          <div className="button-row">
+            <NumButton
+              value="("
+              equation={equation}
+              setEquation={setEquation}
+            />
+            <NumButton
+              value=")"
+              equation={equation}
+              setEquation={setEquation}
+            />
+          </div>
+          <ClearButton setEquation={setEquation} />
         </div>
-
-        <div className="button-row">
-          <NumButton value="*" equation={equation} setEquation={setEquation} />
-          <NumButton value="/" equation={equation} setEquation={setEquation} />
-        </div>
-
-        <div className="button-row">
-          <NumButton value="(" equation={equation} setEquation={setEquation} />
-          <NumButton value=")" equation={equation} setEquation={setEquation} />
-        </div>
-        <ClearButton setEquation={setEquation} />
       </div>
     </>
   );

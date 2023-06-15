@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { HomeLink } from "../../HomeLink";
 
 export function Order() {
   const [cartCount, setCartCount] = useState(0);
+  const [cartContents, setCartContents] = useState([]);
 
   return (
     <>
@@ -23,6 +23,8 @@ export function Order() {
           price="3"
           cartCount={cartCount}
           setCartCount={setCartCount}
+          cartContents={cartContents}
+          setCartContents={setCartContents}
         />
         <MenuItem
           imgName="donut1.webp"
@@ -31,13 +33,34 @@ export function Order() {
           price="30"
           cartCount={cartCount}
           setCartCount={setCartCount}
+          cartContents={cartContents}
+          setCartContents={setCartContents}
+        />
+        <MenuItem
+          imgName="donut4.webp"
+          name="Cookies and Cream Donut"
+          desc="Delicous cookies and cream donut"
+          price="3"
+          cartCount={cartCount}
+          setCartCount={setCartCount}
+          cartContents={cartContents}
+          setCartContents={setCartContents}
         />
       </div>
     </>
   );
 }
 
-function MenuItem({ imgName, name, desc, price, cartCount, setCartCount}) {
+function MenuItem({
+  imgName,
+  name,
+  desc,
+  price,
+  cartCount,
+  setCartCount,
+  cartContents,
+  setCartContents,
+}) {
   const [amount, setAmount] = useState(0);
   function handleInput(val) {
     if (val.length > 2) {
@@ -73,6 +96,10 @@ function MenuItem({ imgName, name, desc, price, cartCount, setCartCount}) {
   function handleClickCart() {
     setCartCount(cartCount + parseInt(amount));
     setAmount(0);
+    setCartContents([
+      ...cartContents,
+      <li key={name} count={parseInt(amount)}></li>,
+    ]);
   }
 
   return (
@@ -85,9 +112,7 @@ function MenuItem({ imgName, name, desc, price, cartCount, setCartCount}) {
           alt={name}
         />
         <p style={{ display: "inline", verticalAlign: "top" }}>{desc}</p>
-        <h4
-          style={{ display: "inline", float: "right", "margin-right": "100px" }}
-        >
+        <h4 style={{ display: "inline", float: "right", marginRight: "100px" }}>
           ${price}
         </h4>
         <div className="item-amount">
@@ -98,7 +123,7 @@ function MenuItem({ imgName, name, desc, price, cartCount, setCartCount}) {
             style={{
               display: "inline",
               width: "30px",
-              "margin-bottom": "20px",
+              marginBottom: "20px",
             }}
             value={amount}
             onChange={(e) => setAmount(handleInput(e.target.value))}

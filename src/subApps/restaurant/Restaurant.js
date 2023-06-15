@@ -7,12 +7,12 @@ export function Restaurant() {
     <>
       <div className="restaurant">
         <HomeLink />
-        <h1 style={{"margin-top":0}}>Donuts</h1>
+        <h1 style={{ marginTop: 0 }}>Donuts</h1>
         <h3>Welcome to Our Donut Shop!</h3>
         <NavBar />
         <br />
         <SlideShow />
-        <h2 style={{ "margin-top": "500px" }}>About Us</h2>
+        <h2 style={{ marginTop: "500px" }}>About Us</h2>
         <p className="txt">
           We love donuts so much we made a store to sell donuts because we love
           them so much. Mere words cannot describe our love for donuts. I ran
