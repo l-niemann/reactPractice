@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { HomeLink } from "../../HomeLink";
 
 export function Order() {
-    const [cartCount,setCartCount] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
 
   return (
     <>
       <div className="order">
+        <Link className="nav-link" style={{ float: "left" }} to="/restaurant">
+          Back
+        </Link>
         <Link className="to-cart" to="/restaurant/cart">
           🛒
         </Link>
@@ -17,19 +21,23 @@ export function Order() {
           name="Cinnamon Donut"
           desc="Our classic cinnamon covered donut"
           price="3"
+          cartCount={cartCount}
+          setCartCount={setCartCount}
         />
         <MenuItem
           imgName="donut1.webp"
           name="Assorted Dozen"
           desc="An assortment of a dozen of our most delicious donuts"
           price="30"
+          cartCount={cartCount}
+          setCartCount={setCartCount}
         />
       </div>
     </>
   );
 }
 
-function MenuItem({ imgName, name, desc, price }) {
+function MenuItem({ imgName, name, desc, price, cartCount, setCartCount}) {
   const [amount, setAmount] = useState(0);
   function handleInput(val) {
     if (val.length > 2) {
@@ -60,6 +68,11 @@ function MenuItem({ imgName, name, desc, price }) {
     } else {
       setAmount(amount - 1);
     }
+  }
+
+  function handleClickCart() {
+    setCartCount(cartCount + parseInt(amount));
+    setAmount(0);
   }
 
   return (
@@ -94,7 +107,9 @@ function MenuItem({ imgName, name, desc, price }) {
             +
           </button>
           <br />
-          <button style={{ display: "inline" }}>Add to cart</button>
+          <button style={{ display: "inline" }} onClick={handleClickCart}>
+            Add to cart
+          </button>
         </div>
       </div>
     </>

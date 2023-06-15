@@ -5,7 +5,6 @@ export function NavBar() {
     <>
       <div>
         <Link className = "nav-link" to="/restaurant/order">Order</Link>
-        <Link className = "nav-link" to="/restaurant/cart">Cart</Link>
       </div>
     </>
   );
