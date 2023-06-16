@@ -1,16 +1,14 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { HomeLink } from "../HomeLink";
 
 export function Cipher() {
   const [output, setOutput] = useState("");
   const [input, setInput] = useState("");
   const [shift, setShift] = useState();
   const [vigenereKey, setVigenereKey] = useState("");
-  const [currCipher, setCurrCipher] = useState("caesar");
+  const [currCipher, setCurrCipher] = useState("Caesar");
 
-useEffect(updateCaesar,[shift]);
-useEffect(updateVigenere,[vigenereKey])
-
-  function updateCaesar() {
+  const updateCaesar = useCallback(() => {
     let str = "";
     let i = 0;
     while (i < input.length) {
@@ -26,12 +24,17 @@ useEffect(updateVigenere,[vigenereKey])
       i++;
     }
     setOutput(str);
-  }
+  }, [input, shift]);
 
-  function updateVigenere() {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const updateVigenere = useCallback(() => {
     let str = "";
-    let plaintext = input.toUpperCase().split();
-    let key = vigenereKey.toUpperCase().split();
+    let plaintext = input.toUpperCase().split("");
+    let key = vigenereKey.toUpperCase().split("");
+    if (key.length === 0 || plaintext.length === 0) {
+      setOutput("");
+      return;
+    }
     let i = 0;
     let j = 0;
     while (i < plaintext.length) {
@@ -45,30 +48,60 @@ useEffect(updateVigenere,[vigenereKey])
       }
       str += String.fromCharCode(char);
       i++;
-      j >= key.length ? (j = 0) : j++;
+      j >= key.length - 1 ? (j = 0) : j++;
     }
-    console.log(str);
     setOutput(str);
-  }
+  }, [input, vigenereKey]);
 
   function updateOutput() {
     switch (currCipher) {
-      case "caesar":
+      case "Caesar":
         updateCaesar();
         break;
-        case "vigenere":
-            updateVigenere();
-            break;
+      case "Vigenére":
+        updateVigenere();
+        break;
       default:
         break;
     }
   }
 
+  function toCaesar() {
+    caesarButton.current.style.backgroundColor = "grey";
+    vigenereButton.current.style.backgroundColor = "white";
+    setCurrCipher("Caesar");
+  }
+
+  function toVigenere(e) {
+    vigenereButton.current.style.backgroundColor = "grey";
+    caesarButton.current.style.backgroundColor = "white";
+    setCurrCipher("Vigenére");
+  }
+
+  useEffect(updateOutput, [currCipher, updateCaesar, updateVigenere]);
+
+  const caesarButton = useRef(null);
+  const vigenereButton = useRef(null);
+
   return (
     <>
-      <h1>Welcome to the Cipher Tool</h1>
-      <button onClick={updateCaesar}>Caesar</button>
-      <button onClick={updateVigenere}>Vigenére</button>
+      <HomeLink />
+      <h1>Cipher App</h1>
+      <button
+        ref={caesarButton}
+        className="cipher-button"
+        style={{ backgroundColor: "grey" }}
+        onClick={toCaesar}
+      >
+        Caesar
+      </button>
+      <button
+        ref={vigenereButton}
+        className="cipher-button"
+        onClick={toVigenere}
+      >
+        Vigenére
+      </button>
       <br />
       <MainInput setInput={setInput} />
       <br />
@@ -86,6 +119,7 @@ function MainInput({ setInput }) {
     <>
       <p style={{ display: "inline" }}>Your Input: </p>
       <input
+      style={{margin:"10px"}}
         onChange={(e) => {
           setInput(e.target.value);
         }}
@@ -99,6 +133,7 @@ function ShiftInput({ setShift }) {
     <>
       <p style={{ display: "inline" }}>Shift Value: </p>
       <input
+      style={{margin:"10px"}}
         type="number"
         onChange={(e) => {
           setShift(e.target.value);
@@ -113,6 +148,7 @@ function VigenereInput({ setVigenereKey }) {
     <>
       <p style={{ display: "inline" }}>Vigenére Key: </p>
       <input
+      style={{margin:"10px"}}
         onChange={(e) => {
           setVigenereKey(e.target.value);
         }}

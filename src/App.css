@@ -183,8 +183,8 @@ body {
   background-color: white;
 }
 
-.tabula{
-  width: 300px;
-  margin-left: auto;
-  margin-right: auto;
+.cipher-button{
+  padding: 10px;
+  margin: 10px;
+  border: none;
 }
