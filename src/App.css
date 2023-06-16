@@ -133,8 +133,9 @@ body {
 
 .menu-img {
   display: inline;
-  width: 100px;
+  width: 150px;
   height: 100px;
+  margin:10px;
 }
 
 .item-amount {
@@ -147,6 +148,12 @@ body {
   text-decoration: none;
   right: 20px;
   top: 10px;
+  background-color: rgba(0,0,0,0);
+  border-width: 0;
+}
+
+.to-cart:hover, .to-cart:hover + .num-circle{
+  opacity: 0.5;
 }
 
 .num-circle {
@@ -163,4 +170,15 @@ body {
   border-radius: 50%;
   border-width: 1px;
   margin: 2px;
+}
+
+.cart{
+  position: fixed;
+  width: 500px;
+  height: 400px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
 }

@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 export function Order() {
   const [cartCount, setCartCount] = useState(0);
   const [cartContents, setCartContents] = useState([]);
+  const [cartIsActive, setCartIsActive] = useState(false);
+
+  function handleClick() {
+    setCartIsActive(!cartIsActive);
+  }
 
   return (
     <>
@@ -11,16 +16,23 @@ export function Order() {
         <Link className="nav-link" style={{ float: "left" }} to="/restaurant">
           Back
         </Link>
-        <Link className="to-cart" to="/restaurant/cart">
+        <button className="to-cart" onClick={handleClick}>
           🛒
-        </Link>
+        </button>
         <p className="num-circle">{cartCount}</p>
         <h1>Please select your order for pickup</h1>
+        <Cart
+          isActive={cartIsActive}
+          setIsActive={setCartIsActive}
+          cartContents={cartContents}
+          setCartContents={setCartContents}
+          setCartCount={setCartCount}
+        />
         <MenuItem
           imgName="donut3.webp"
           name="Cinnamon Donut"
           desc="Our classic cinnamon covered donut"
-          price="3"
+          price="1.99"
           cartCount={cartCount}
           setCartCount={setCartCount}
           cartContents={cartContents}
@@ -30,7 +42,7 @@ export function Order() {
           imgName="donut1.webp"
           name="Assorted Dozen"
           desc="An assortment of a dozen of our most delicious donuts"
-          price="30"
+          price="27.99"
           cartCount={cartCount}
           setCartCount={setCartCount}
           cartContents={cartContents}
@@ -40,7 +52,7 @@ export function Order() {
           imgName="donut4.webp"
           name="Cookies and Cream Donut"
           desc="Delicous cookies and cream donut"
-          price="3"
+          price="2.99"
           cartCount={cartCount}
           setCartCount={setCartCount}
           cartContents={cartContents}
@@ -96,25 +108,43 @@ function MenuItem({
   function handleClickCart() {
     setCartCount(cartCount + parseInt(amount));
     setAmount(0);
-    setCartContents([
-      ...cartContents,
-      <li key={name} count={parseInt(amount)}></li>,
-    ]);
+    var tempCart =[];
+    var exists = false;
+    cartContents.forEach((item) =>{
+        if(item.name === name){
+            exists = true;
+            tempCart.push({name: name, count: amount + item.count, price: price});
+        } else {
+            tempCart.push(item);
+        }
+    });
+    if (!exists){
+        tempCart.push({name: name, count: amount, price: price});
+    }
+    setCartContents(tempCart);
+    // setCartContents([
+    //   ...cartContents,
+    //   {
+    //     name: name,
+    //     count: parseInt(amount),
+    //     price: parseFloat(price),
+    //   },
+    // ]);
   }
 
   return (
     <>
       <div className="menu-item">
-        <h3>{name}</h3>
+        <h3 style={{ margin: "10px" }}>{name}</h3>
         <img
           className="menu-img"
           src={require(`../../images/${imgName}`)}
           alt={name}
         />
         <p style={{ display: "inline", verticalAlign: "top" }}>{desc}</p>
-        <h4 style={{ display: "inline", float: "right", marginRight: "100px" }}>
+        <h2 style={{ position: "absolute", display: "inline", left: "80%" }}>
           ${price}
-        </h4>
+        </h2>
         <div className="item-amount">
           <button className="menu-button" onClick={handleClickDown}>
             -
@@ -137,6 +167,39 @@ function MenuItem({
           </button>
         </div>
       </div>
+    </>
+  );
+}
+
+function Cart({ isActive, setIsActive, cartContents, setCartContents, setCartCount }) {
+    function handleClickCheckout(){
+        setCartContents([]);
+        setCartCount(0);
+    }
+    function handleClickCancel(){
+        setIsActive(false);
+    }
+  var total = 0;
+  return (
+    <>
+      {isActive ? (
+        <div className="cart">
+          <ul>
+            {cartContents.map((item) => {
+              total += item.price * item.count;
+              total = parseFloat(total.toFixed(2));
+              return (
+                <li key={item.name}>
+                  {item.name}: {item.count}
+                </li>
+              );
+            })}
+          </ul>
+          <h3>Total: {total}</h3>
+          <button onClick={handleClickCancel}>Cancel</button>
+          <button onClick={handleClickCheckout}>Check Out</button>
+        </div>
+      ) : null}
     </>
   );
 }
