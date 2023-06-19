@@ -128,7 +128,6 @@ function MainInput({ input, setInput }) {
             let char = str.toUpperCase().charCodeAt(i);
             if(char === 32 || (char >= 65 && char <= 90)){
                 strOut+= String.fromCharCode(char);
-                console.log(strOut);
             }
         }
         setInput(strOut);
