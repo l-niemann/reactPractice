@@ -127,7 +127,6 @@ export function Calculator() {
 function InputBox({ equation, setEquation }) {
   return (
     <input
-      readOnly
       onChange={(e) => setEquation(e.target.value)}
       value={equation}
     ></input>
@@ -147,9 +146,21 @@ function NumButton({ value, equation, setEquation }) {
 
 function EnterButton({ equation, setEquation }) {
   function handleClick() {
+    let strOut = "";
+    for (let i in equation) {
+      let char = equation.charCodeAt(i);
+      if (
+        char === 45 ||
+        char === 47 ||
+        (char > 39 && char < 44) ||
+        (char > 47 && char < 58)
+      ) {
+        strOut += String.fromCharCode(char);
+      }
+    }
     try {
       // eslint-disable-next-line no-eval
-      setEquation(eval(equation));
+      setEquation(eval(strOut));
     } catch (error) {
       setEquation("ERROR");
     }
