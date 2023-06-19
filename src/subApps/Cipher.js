@@ -13,12 +13,14 @@ export function Cipher() {
     let i = 0;
     while (i < input.length) {
       let char = input.toUpperCase().charCodeAt(i);
-      char += parseInt(shift) % 26;
-      if (char > 90) {
-        char -= 26;
-      }
-      if (char < 65) {
-        char += 26;
+      if (!(char === 32)) {
+        char += parseInt(shift) % 26;
+        if (char > 90) {
+          char -= 26;
+        }
+        if (char < 65) {
+          char += 26;
+        }
       }
       str += String.fromCharCode(char);
       i++;
@@ -38,13 +40,17 @@ export function Cipher() {
     let i = 0;
     let j = 0;
     while (i < plaintext.length) {
-      let char =
-        ((key[j].charCodeAt(0) - 64) % 26) + plaintext[i].charCodeAt(0);
-      if (char > 90) {
-        char -= 26;
-      }
-      if (char < 65) {
-        char += 26;
+      let char;
+      if (plaintext[i] === " ") {
+        char = 32;
+      } else {
+        char = ((key[j].charCodeAt(0) - 64) % 26) + plaintext[i].charCodeAt(0);
+        if (char > 90) {
+          char -= 26;
+        }
+        if (char < 65) {
+          char += 26;
+        }
       }
       str += String.fromCharCode(char);
       i++;
@@ -103,7 +109,7 @@ export function Cipher() {
         Vigenére
       </button>
       <br />
-      <MainInput setInput={setInput} />
+      <MainInput input={input} setInput={setInput} />
       <br />
       <ShiftInput setShift={setShift} />
       <VigenereInput setVigenereKey={setVigenereKey} />
@@ -114,15 +120,28 @@ export function Cipher() {
   );
 }
 
-function MainInput({ setInput }) {
+function MainInput({ input, setInput }) {
+    function handleInput(e){
+        let strOut = "";
+        let str = e.target.value;
+        for (let i in str){
+            let char = str.toUpperCase().charCodeAt(i);
+            if(char === 32 || (char >= 65 && char <= 90)){
+                strOut+= String.fromCharCode(char);
+                console.log(strOut);
+            }
+        }
+        setInput(strOut);
+    }
   return (
     <>
       <p style={{ display: "inline" }}>Your Input: </p>
       <input
-      style={{margin:"10px"}}
+        style={{ margin: "10px" }}
         onChange={(e) => {
-          setInput(e.target.value);
+          handleInput(e);
         }}
+        value={input}
       ></input>
     </>
   );
@@ -133,7 +152,7 @@ function ShiftInput({ setShift }) {
     <>
       <p style={{ display: "inline" }}>Shift Value: </p>
       <input
-      style={{margin:"10px"}}
+        style={{ margin: "10px" }}
         type="number"
         onChange={(e) => {
           setShift(e.target.value);
@@ -148,7 +167,7 @@ function VigenereInput({ setVigenereKey }) {
     <>
       <p style={{ display: "inline" }}>Vigenére Key: </p>
       <input
-      style={{margin:"10px"}}
+        style={{ margin: "10px" }}
         onChange={(e) => {
           setVigenereKey(e.target.value);
         }}
