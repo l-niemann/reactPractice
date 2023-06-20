@@ -9,6 +9,8 @@ export function Layout() {
           <Link className = "link" to="/restaurant">Restaurant</Link>
           <br />
           <Link className = "link" to="/cipher">Cipher</Link>
+          <br />
+          <Link className = "link" to="/jumping-game">Jumping Game</Link>
         <Outlet />
     </>
   );

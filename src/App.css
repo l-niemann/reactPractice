@@ -188,3 +188,10 @@ body {
   margin: 10px;
   border: none;
 }
+
+.jump{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  background-color: white;
+}
