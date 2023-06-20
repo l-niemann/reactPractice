@@ -3,6 +3,7 @@ import { NavBar } from "./NavBar";
 import { SlideShow } from "./SlideShow";
 
 export function Restaurant() {
+  const imageArr = [{name: "donut1.webp"},{name: "donut2.webp"},{name: "donut3.webp"}]
   return (
     <>
       <div className="restaurant">
@@ -11,7 +12,7 @@ export function Restaurant() {
         <h3>Welcome to Our Donut Shop!</h3>
         <NavBar />
         <br />
-        <SlideShow />
+        <SlideShow imageArr={imageArr}/>
         <h2 style={{ marginTop: "500px" }}>About Us</h2>
         <p className="txt">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae

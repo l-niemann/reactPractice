@@ -122,14 +122,6 @@ function MenuItem({
         tempCart.push({name: name, count: amount, price: price});
     }
     setCartContents(tempCart);
-    // setCartContents([
-    //   ...cartContents,
-    //   {
-    //     name: name,
-    //     count: parseInt(amount),
-    //     price: parseFloat(price),
-    //   },
-    // ]);
   }
 
   return (

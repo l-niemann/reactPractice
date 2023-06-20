@@ -4,6 +4,7 @@ import { HomeLink } from "../HomeLink";
 export function JumpGame() {
   const [isStart, setStart] = useState(false);
   const [isOver, setIsOver] = useState(false);
+  const [score, setScore] = useState(0);
 
   var isJump = false;
   var touchedGround = true;
@@ -33,14 +34,13 @@ export function JumpGame() {
       ctx.clearRect(0, 0, 1000, 500);
       ctx.fillStyle = "rgba(255, 200, 100, 1)";
       ctx.fillRect(playerPos[0], playerPos[1], 50, 50);
-      //console.log("x: " + playerPos[0] + " y: " + playerPos[1]);
       let obstacleChance = Math.random();
 
       if (obstacleChance < obstacleReq) {
         obstacleArr.push(createObstacle());
         obstacleReq = 0;
       } else {
-        obstacleReq += 0.0001;
+        obstacleReq += 0.0002;
       }
       ctx.fillStyle = "black";
       obstacleArr.forEach((obstacle) => {
@@ -51,15 +51,21 @@ export function JumpGame() {
           obstacle.size
         );
         obstacle.pos[0] -= obstacle.speed;
+        if (obstacle.pos[0] < 0) {
+          let index = obstacleArr.indexOf(obstacle);
+          if (index > -1) {
+            obstacleArr.splice(index, 1);
+          }
+        }
         if (
           playerPos[0] > obstacle.pos[0] &&
           playerPos[0] < obstacle.pos[0] + obstacle.size &&
           playerPos[1] >= obstacle.pos[1] - obstacle.size
         ) {
-            while(obstacleArr.length > 0){
-                obstacleArr.pop();
-            }
-            setIsOver(true);
+          while (obstacleArr.length > 0) {
+            obstacleArr.pop();
+          }
+          setIsOver(true);
         }
       });
     }
@@ -68,12 +74,16 @@ export function JumpGame() {
   function handleButtonPress(e) {
     switch (e.key) {
       case "a":
-        playerPos[0] -= 10;
+        if (playerPos[0] > 0){
+          playerPos[0] -= 10;
+        }
         break;
       case "d":
-        playerPos[0] += 10;
+        if (playerPos[0] < 950){
+          playerPos[0] += 10;
+        }
         break;
-      case "w":
+        case "w":
         if (isJump === false && touchedGround === true) {
           touchedGround = false;
           isJump = true;
@@ -85,21 +95,35 @@ export function JumpGame() {
   }
 
   function createObstacle() {
-    if (! isOver){
-        var obstacle = {
-          pos: [1050, 450],
-          size: 10+Math.random()*40,
-          speed: 5+Math.random()*5,
-        };
-        return obstacle;
+    if (!isOver) {
+      var obstacle = {
+        pos: [1050, 450],
+        size: 10 + Math.random() * 40,
+        speed: 5 + Math.random() * 5,
+      };
+      return obstacle;
     }
   }
 
-  useEffect(function(){setInterval(onUpdate, 20)},[]);
-  useEffect(
-    () => document.addEventListener("keydown", (e) => handleButtonPress(e)),
-    []
-  );
+  useEffect(() => {
+    const scoreInterval = setInterval(() => {
+      if (!isOver && isStart) {
+        setScore((s) => s + 1);
+      }
+    }, 1000);
+    return () => clearInterval(scoreInterval);
+  }, [isOver, isStart]);
+
+  useEffect(() => {
+    const interval = setInterval(onUpdate, 20);
+    return () => clearInterval(interval);
+  }, [onUpdate]);
+  useEffect(() => {
+    const listener = document.addEventListener("keydown", (e) =>
+      handleButtonPress(e)
+    );
+    return () => window.removeEventListener("keydown", listener);
+  });
   const canvas = useRef(null);
 
   return (
@@ -107,7 +131,8 @@ export function JumpGame() {
       <HomeLink />
       <div>
         <h2>Jumping Game</h2>
-        {isOver ? <h3 style = {{color:"red"}}>Game Over</h3> : null}
+        {isOver ? <h3 style={{ color: "red" }}>Game Over</h3> : null}
+        <h4>Score: {score}</h4>
         {isStart && !isOver ? (
           <canvas
             ref={canvas}
@@ -123,18 +148,19 @@ export function JumpGame() {
               paddingRight: "60px",
             }}
             onClick={() => {
+              setScore(0);
               setStart(true);
               setIsOver(false);
             }}
           >
-            Start
+            {isOver ? "Restart" : "Start"}
           </button>
         )}
       </div>
       <h2>Controls: </h2>
-      <p>w: jump</p>
-      <p>a: left</p>
-      <p>d: right</p>
+      <p>W: jump</p>
+      <p>A: left</p>
+      <p>D: right</p>
     </>
   );
 }
