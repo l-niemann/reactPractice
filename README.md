@@ -1,6 +1,6 @@
 # Sample App
 This is an app I use to practice writing React.
-Currently there are 4 apps: `Calculator`, `Restaurant`, `Cipher`, and 'Jumping Game'.
+Currently there are 4 apps: `Calculator`, `Restaurant`, `Cipher`, and `Jumping Game`.
 
 # Calculator
 This app is a simple calculator that can do basic operations with
