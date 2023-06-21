@@ -14,6 +14,7 @@ export function JumpGame() {
   const playerPos = [50, 450];
   const obstacleArr = [];
 
+  //TODO: Fix warnings
   const onUpdate = useCallback(() => {
     if (canvas.current !== null) {
       if (isJump === true) {

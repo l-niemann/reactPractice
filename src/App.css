@@ -18,7 +18,7 @@ body {
   );
 }
 
-.calc{
+.calc {
   background-color: grey;
   width: 200px;
   padding-bottom: 20px;
@@ -26,7 +26,7 @@ body {
   margin-right: auto;
 }
 
-.calc-box{
+.calc-box {
   padding: 30px;
 }
 
@@ -135,7 +135,7 @@ body {
   display: inline;
   width: 150px;
   height: 100px;
-  margin:10px;
+  margin: 10px;
 }
 
 .item-amount {
@@ -148,31 +148,32 @@ body {
   text-decoration: none;
   right: 20px;
   top: 10px;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   border-width: 0;
 }
 
-.to-cart:hover, .to-cart:hover + .num-circle{
+.to-cart:hover,
+.to-cart:hover + .num-circle {
   opacity: 0.5;
 }
 
 .num-circle {
-  position:fixed;
+  position: fixed;
   width: 20px;
   height: 20px;
   background: red;
   border-radius: 50%;
-  right:15px;
+  right: 15px;
   top: 0px;
 }
 
-.menu-button{
+.menu-button {
   border-radius: 50%;
   border-width: 1px;
   margin: 2px;
 }
 
-.cart{
+.cart {
   position: fixed;
   width: 500px;
   height: 500px;
@@ -183,15 +184,106 @@ body {
   background-color: white;
 }
 
-.cipher-button{
+.cipher-button {
   padding: 10px;
   margin: 10px;
   border: none;
 }
 
-.jump{
+.jump {
   margin-left: auto;
   margin-right: auto;
   margin-top: 50px;
   background-color: white;
+}
+
+.todo-item,
+.todo-p,
+.todo-button,
+.todo-box {
+  margin-left: 50px;
+  margin-right: 50px;
+  display: inline-block;
+  background-color: rgb(255, 189, 47);
+}
+
+.todo-item {
+  display: block;
+  padding: 10px;
+  width: 500px;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.todo-button {
+  float: left;
+  color: rgb(255, 88, 88);
+  border-color: #ffefc8;
+  background-color: #ffefc8;
+  border-width: 1px;
+  margin-left: 0;
+  margin-top: 10px;
+  width: 25px;
+  height: 25px;
+  border-radius: 10%;
+}
+
+.todo-box {
+  float: right;
+  margin-right: 0;
+  margin-top: 10px;
+  margin-bottom: auto;
+  width: 25px;
+  height: 25px;
+}
+
+.todo-section,
+.add-item {
+  display: inline;
+  border: none;
+  background: none;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 50px;
+}
+
+.todo-section {
+  font-size: 50px;
+}
+
+.add-item {
+  font-size: 30px;
+}
+
+.todo-section:hover,
+.add-item:hover {
+  color: rgba(0, 0, 0, 1);
+}
+
+.input-todo-section {
+  vertical-align: text-bottom;
+  height: 25px;
+}
+
+.input-add-item {
+  vertical-align: text-bottom;
+}
+
+.todo-section-p{
+  display: inline;
+}
+
+.todo-section-button{
+  margin: 10px;
+  border: none;
+  display: inline;
+  background: none;
+  opacity: 0;
+}
+
+.todo-section-button:hover, .todo-section-p + .todo-section-button{
+  color: red;
+  opacity: 1;
 }
