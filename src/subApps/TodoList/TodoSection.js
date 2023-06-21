@@ -6,11 +6,7 @@ export function TodoSection({ name, sectionArr, setSectionArr }) {
   const [itemArr, setItemArr] = useState([]);
 
   function handleDelete(){
-    let newArr = sectionArr.filter((element) => {
-        if (element.name !== name){
-            return element;
-        }
-    })
+    let newArr = sectionArr.filter((element) => element.name !== name);
     setSectionArr(newArr);
 }
 
