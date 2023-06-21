@@ -1,6 +1,6 @@
 # Sample App
 This is an app I use to practice writing React.
-Currently there are 4 apps: `Calculator`, `Restaurant`, `Cipher`, and `Jumping Game`.
+Currently there are 5 apps: `Calculator`, `Restaurant`, `Cipher`, `Jumping Game`, and `Todo List`.
 
 # Calculator
 This app is a simple calculator that can do basic operations with
@@ -14,3 +14,6 @@ Has two different ciphers that can be used to encrypt an input: Caesar and Vigen
 
 # Jumping Game
 This is a game where you jump over blocks as they come towards you like the google dinosaur game.
+
+#Todo List
+Simple todo list where you can add/remove sections and items
