@@ -271,19 +271,15 @@ body {
   vertical-align: text-bottom;
 }
 
-.todo-section-p{
-  display: inline;
-}
-
 .todo-section-button{
+  color: red;
   margin: 10px;
   border: none;
   display: inline;
   background: none;
-  opacity: 0;
 }
 
-.todo-section-button:hover, .todo-section-p + .todo-section-button{
-  color: red;
-  opacity: 1;
+.todo-section-p{
+  display: inline;
 }
+
