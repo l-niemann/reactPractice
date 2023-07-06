@@ -28,7 +28,6 @@ export function Cipher() {
     setOutput(str);
   }, [input, shift]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateVigenere = useCallback(() => {
     let str = "";
     let plaintext = input.toUpperCase().split("");

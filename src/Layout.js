@@ -23,6 +23,10 @@ export function Layout() {
       <Link className="link" to="/todo-list">
         Todo List
       </Link>
+      <br />
+      <Link className="link" to="/styled-components">
+        Styled Components
+      </Link>
       <Outlet />
     </>
   );
