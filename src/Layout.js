@@ -27,6 +27,10 @@ export function Layout() {
       <Link className="link" to="/styled-components">
         Styled Components
       </Link>
+      <br />
+      <Link className="link" to="/notes">
+        Notes
+      </Link>
       <Outlet />
     </>
   );

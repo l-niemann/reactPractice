@@ -8,6 +8,7 @@ import { Cipher } from "./subApps/Cipher";
 import { JumpGame } from "./subApps/JumpGame";
 import { TodoList } from "./subApps/TodoList/TodoList";
 import { StyledComponentPractice } from "./subApps/StyledComponentPractice";
+import { Notes } from "./subApps/notes/Notes";
 
 function App() {
   return (
@@ -20,11 +21,12 @@ function App() {
           <Route path="/cipher" element={<Cipher />} />
           <Route path="/jumping-game" element={<JumpGame />} />
           <Route path="/todo-list" element={<TodoList />} />
-          <Route path="/" element={<Layout />} />
+          <Route path="/notes" element={<Notes />} />
           <Route
             path="/styled-components"
             element={<StyledComponentPractice />}
           />
+          <Route path="/" element={<Layout />} />
         </Routes>
       </BrowserRouter>
     </div>
