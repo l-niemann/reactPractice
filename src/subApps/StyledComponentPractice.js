@@ -28,8 +28,6 @@ const DownButton = styled(Button)`
   ${DownSwapper}
 `;
 
-//TODO: Maybe figure out how to do this /w out recreating class every time
-//(255/2)sin(x*(pi/255)+(pi/2))+255/2
 const NumberHead = styled.h1`
   color: ${({ value }) => {
     let temp = Math.round(
@@ -51,7 +49,7 @@ export function StyledComponentPractice() {
       <UpButton
         type={isActive}
         onClick={() => {
-          setNumVal(numVal - 10);
+          setNumVal(numVal - 1);
           setIsActive("on");
         }}
       >
@@ -60,7 +58,7 @@ export function StyledComponentPractice() {
       <DownButton
         type={isActive}
         onClick={() => {
-          setNumVal(numVal + 10);
+          setNumVal(numVal + 1);
           setIsActive("off");
         }}
       >
