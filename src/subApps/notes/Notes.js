@@ -6,6 +6,7 @@ import { useState } from "react";
 export function Notes() {
   const [notesArr, setNotesArr] = useState([]);
   //TODO: Make this look a little nicer. Add delete button. Clean up logs
+  //TODO: Make the cancel button from todo more general so it can be reused
   return (
     <div>
       <HomeLink />
