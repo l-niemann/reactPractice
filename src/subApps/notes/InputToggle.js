@@ -11,12 +11,21 @@ export function InputToggle({notesArr, setNotesArr}) {
   });
 
   function handleAdd() {
-    let newNode = {
-      title: titleRef.current.value,
-      desc: descRef.current.value,
-    };
-    setNotesArr([...notesArr,newNode]);
-    console.log(notesArr);
+    let isUnique = true;
+    notesArr.forEach(element => {
+      if (element.title === titleRef.current.value){
+        alert("ERROR: Notes require unique titles");
+        isUnique = false;
+      }
+    });
+    if (isUnique){
+      let newNode = {
+        title: titleRef.current.value,
+        desc: descRef.current.value,
+      };
+      setNotesArr([...notesArr,newNode]);
+      console.log(notesArr);
+    }
 }
 
   return (

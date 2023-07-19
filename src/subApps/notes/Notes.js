@@ -5,19 +5,15 @@ import { useState } from "react";
 
 export function Notes() {
   const [notesArr, setNotesArr] = useState([]);
-  //TODO: Make this look a little nicer. Add delete button
+  //TODO: Make this look a little nicer. Add delete button. Clean up logs
   return (
     <div>
       <HomeLink />
       <h1>Notes</h1>
       <InputToggle notesArr={notesArr} setNotesArr={setNotesArr} />
-      {
-        //TODO: Make each note have a unique key and make input...
-        //titles be different
-      }
       {notesArr.map((note) => {
         console.log(notesArr);
-        return <Note title={note.title} desc={note.desc} />;
+        return <Note key={note.title} title={note.title} desc={note.desc} />;
       })}
     </div>
   );
